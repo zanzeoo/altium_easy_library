@@ -82,7 +82,7 @@ Par **un bibliothécaire**, une fois :
 1. Dans Altium : *File » New » Library » Database Library*.
 2. *Use Connection String* : coller la chaîne affichée dans « Configurer Altium ».
 3. *Options* : guillemet double `"` comme caractère de citation gauche et droit.
-4. Pour chaque table : champ clé **Part Number**. Altium reconnaît seul `Library Ref`,
+4. Pour chaque table : champ clé **Ref Interne** (la référence interne `LIB-000123`, stable ; la colonne `Part Number` affiche le vrai numéro fabricant). Altium reconnaît seul `Library Ref`,
    `Library Path`, `Footprint Ref` et `Footprint Path`.
 5. *Symbol & Model Search Path* : `\\serveur\altium-lib`, avec la recherche dans les sous-dossiers.
 6. Enregistrer le `.DbLib`, puis le déposer via « Configurer Altium » : il est placé à la racine du
