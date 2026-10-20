@@ -82,10 +82,15 @@ Par **un bibliothécaire**, une fois :
 1. Dans Altium : *File » New » Library » Database Library*.
 2. *Use Connection String* : coller la chaîne affichée dans « Configurer Altium ».
 3. *Options* : guillemet double `"` comme caractère de citation gauche et droit.
-4. Pour chaque table : champ clé **Part Number**. Altium reconnaît seul `Library Ref`,
-   `Library Path`, `Footprint Ref` et `Footprint Path`.
-5. *Symbol & Model Search Path* : `\\serveur\altium-lib`, avec la recherche dans les sous-dossiers.
-6. Enregistrer le `.DbLib`, puis le déposer via « Configurer Altium » : il est placé à la racine du
+4. Ne laisser **activées que les tables de catégories** (`Resistances`, `Condensateurs`, …) :
+   désactiver `categories`, `datasheets`, `groups`, `history`, `notifications`, `parts` et `users`,
+   qui ne sont pas des vues Altium et provoquent des erreurs `relation ... does not exist`.
+5. Pour chaque table activée, choisir **Ref Interne** comme **champ clé** : c'est la référence
+   interne stable (`LIB-000123`), celle qu'Altium mémorise dans les schémas. Ne pas prendre
+   `Part Number`, qui affiche le vrai numéro fabricant (MPN) et peut changer ou se répéter.
+   Altium reconnaît seul `Library Ref`, `Library Path`, `Footprint Ref` et `Footprint Path`.
+6. *Symbol & Model Search Path* : `\\serveur\altium-lib`, avec la recherche dans les sous-dossiers.
+7. Enregistrer le `.DbLib`, puis le déposer via « Configurer Altium » : il est placé à la racine du
    partage. Chaque poste l'ajoute ensuite depuis `\\serveur\altium-lib\Bibliotheque.DbLib`
    (*Components » ⋮ » File-based Libraries Preferences*).
 

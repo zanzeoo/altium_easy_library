@@ -61,7 +61,8 @@ def regenerate(conn) -> list[str]:
     names = []
     for c in cats:
         cols: list[tuple[str, sql.Composable]] = [
-            ("Part Number", sql.SQL("p.id")),
+            ("Ref Interne", sql.SQL("p.id")),     # champ clé de la DbLib (stable, unique)
+            ("Part Number", sql.SQL("coalesce(p.mpn, '')")),
             ("Library Ref", sql.SQL("p.symbol_ref")),
             ("Library Path", sql.SQL("replace(p.symbol_file, '/', '\\')")),
             ("Footprint Ref", sql.SQL("p.footprint_ref")),

@@ -15,7 +15,7 @@ pool: ConnectionPool | None = None
 def open_pool() -> None:
     global pool
     pool = ConnectionPool(config.DATABASE_URL, min_size=1, max_size=10,
-                          kwargs={"row_factory": dict_row}, open=True)
+                          kwargs={"row_factory": dict_row, "options": "-c search_path=public"}, open=True)
     pool.wait(timeout=60)
 
 
