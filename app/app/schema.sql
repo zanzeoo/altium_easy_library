@@ -104,3 +104,10 @@ CREATE TABLE IF NOT EXISTS datasheets (
 );
 
 CREATE SCHEMA IF NOT EXISTS altium;
+
+-- Marqueurs des opérations de maintenance déjà effectuées
+CREATE TABLE IF NOT EXISTS app_meta (
+  key   text PRIMARY KEY,
+  value text NOT NULL,
+  at    timestamptz NOT NULL DEFAULT now()
+);

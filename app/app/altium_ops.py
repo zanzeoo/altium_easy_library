@@ -294,7 +294,9 @@ def write_part_files(part_id: str, sid: str, sym_idx: int | None, fp_idx: int | 
             sym.remove_object(o)
         for o in list(sym.implementations):     # l'empreinte aussi (Footprint Ref/Path)
             sym.remove_object(o)
-        one.rename_symbol(sym, part_id)
+        # Renomme le stockage ET la référence lue par Altium (LibReference) : c'est elle que la
+        # colonne « Library Ref » de la DbLib doit retrouver.
+        one.rename_symbol(sym, part_id, original_name=part_id)
         target = dest / f"{part_id}.SchLib"
         one.save(target)
         out.update(symbol_ref=part_id, symbol_name=target.name, pins=s["pins"], pin_ids=s["pin_ids"])
@@ -314,6 +316,19 @@ def write_part_files(part_id: str, sid: str, sym_idx: int | None, fp_idx: int | 
         one.save(target)
         out.update(footprint_ref=fp.name, footprint_name=target.name, pads=f["pads"], pad_ids=f["pad_ids"], has_3d=has3d)
     return out
+
+
+def fix_symbol_reference(path: Path, part_id: str) -> bool:
+    """Aligne la référence du symbole (LibReference) sur la référence interne. Renvoie True si modifié."""
+    lib = AltiumSchLib(path)
+    if not lib.symbols:
+        return False
+    sym = lib.symbols[0]
+    if sym.name == part_id and sym.original_name == part_id:
+        return False
+    lib.rename_symbol(sym, part_id, original_name=part_id)
+    lib.save(path)
+    return True
 
 
 def store_pdf(path: Path) -> tuple[str, int]:
