@@ -76,6 +76,16 @@ Sur **chaque poste** :
    pilote « PostgreSQL Unicode(x64) »).
 2. Pouvoir ouvrir `\\serveur\altium-lib` avec le compte `SMB_USER` (l'enregistrer dans le
    gestionnaire d'identifiants Windows).
+   L'identifiant doit être préfixé par le serveur, sinon Windows envoie le nom du compte
+   Microsoft ou du domaine et Samba refuse la connexion :
+
+   ```cmd
+   net use * /delete /y
+   net use Z: \\serveur\altium-lib /user:serveur\altium VOTRE_SMB_PASSWORD /persistent:yes
+   ```
+
+   Dans la fenêtre d'identification de l'Explorateur, saisir de même `serveur\altium`
+   (*Autres choix › Utiliser un autre compte*).
 
 Par **un bibliothécaire**, une fois :
 
