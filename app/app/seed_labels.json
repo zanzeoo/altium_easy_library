@@ -1,0 +1,212 @@
+{
+ "groups": {
+  "passive": {
+   "fr": "Passifs",
+   "en": "Passives"
+  },
+  "discrete": {
+   "fr": "Semiconducteurs discrets",
+   "en": "Discrete semiconductors"
+  },
+  "ic": {
+   "fr": "Circuits intégrés",
+   "en": "Integrated circuits"
+  },
+  "electromech": {
+   "fr": "Électromécanique",
+   "en": "Electromechanical"
+  },
+  "mech": {
+   "fr": "Mécanique",
+   "en": "Mechanical"
+  }
+ },
+ "cats": {
+  "res": {
+   "fr": "Résistances",
+   "en": "Resistors"
+  },
+  "cap": {
+   "fr": "Condensateurs",
+   "en": "Capacitors"
+  },
+  "ind": {
+   "fr": "Inductances / Ferrites",
+   "en": "Inductors / Ferrites"
+  },
+  "dio": {
+   "fr": "Diodes",
+   "en": "Diodes"
+  },
+  "fet": {
+   "fr": "Transistors",
+   "en": "Transistors"
+  },
+  "led": {
+   "fr": "LED",
+   "en": "LEDs"
+  },
+  "mcu": {
+   "fr": "Microcontrôleurs",
+   "en": "Microcontrollers"
+  },
+  "pwr": {
+   "fr": "Alimentation",
+   "en": "Power"
+  },
+  "ana": {
+   "fr": "Analogique",
+   "en": "Analog"
+  },
+  "itf": {
+   "fr": "Interface",
+   "en": "Interface"
+  },
+  "rf": {
+   "fr": "RF",
+   "en": "RF"
+  },
+  "con": {
+   "fr": "Connecteurs",
+   "en": "Connectors"
+  },
+  "sw": {
+   "fr": "Boutons / Interrupteurs",
+   "en": "Buttons / Switches"
+  },
+  "osc": {
+   "fr": "Quartz / Oscillateurs",
+   "en": "Crystals / Oscillators"
+  },
+  "mec": {
+   "fr": "Fixations / Repères",
+   "en": "Mounting / Fiducials"
+  }
+ },
+ "params": {
+  "R": {
+   "fr": "Résistance",
+   "en": "Resistance"
+  },
+  "tol": {
+   "fr": "Tolérance",
+   "en": "Tolerance"
+  },
+  "P": {
+   "fr": "Puissance",
+   "en": "Power"
+  },
+  "Vmax": {
+   "fr": "Tension max",
+   "en": "Max voltage"
+  },
+  "C": {
+   "fr": "Capacité",
+   "en": "Capacitance"
+  },
+  "V": {
+   "fr": "Tension",
+   "en": "Voltage"
+  },
+  "diel": {
+   "fr": "Diélectrique",
+   "en": "Dielectric"
+  },
+  "L": {
+   "fr": "Valeur",
+   "en": "Value"
+  },
+  "type": {
+   "fr": "Type",
+   "en": "Type"
+  },
+  "ch": {
+   "fr": "Canal",
+   "en": "Channel"
+  },
+  "color": {
+   "fr": "Couleur",
+   "en": "Color"
+  },
+  "core": {
+   "fr": "Cœur",
+   "en": "Core"
+  },
+  "f": {
+   "fr": "Fréquence",
+   "en": "Frequency"
+  },
+  "io": {
+   "fr": "E/S",
+   "en": "I/O"
+  },
+  "topo": {
+   "fr": "Topologie",
+   "en": "Topology"
+  },
+  "fn": {
+   "fr": "Fonction",
+   "en": "Function"
+  },
+  "chan": {
+   "fr": "Canaux",
+   "en": "Channels"
+  },
+  "spec": {
+   "fr": "Caractéristique",
+   "en": "Key spec"
+  },
+  "sup": {
+   "fr": "Alim.",
+   "en": "Supply"
+  },
+  "rate": {
+   "fr": "Débit",
+   "en": "Data rate"
+  },
+  "band": {
+   "fr": "Bande",
+   "en": "Band"
+  },
+  "sens": {
+   "fr": "Sensibilité",
+   "en": "Sensitivity"
+  },
+  "pitch": {
+   "fr": "Pas",
+   "en": "Pitch"
+  },
+  "pos": {
+   "fr": "Contacts",
+   "en": "Positions"
+  },
+  "rows": {
+   "fr": "Rangées",
+   "en": "Rows"
+  },
+  "orient": {
+   "fr": "Orientation",
+   "en": "Orientation"
+  },
+  "force": {
+   "fr": "Force",
+   "en": "Force"
+  },
+  "rating": {
+   "fr": "Calibre",
+   "en": "Rating"
+  },
+  "ppm": {
+   "fr": "Tolérance",
+   "en": "Tolerance"
+  },
+  "CL": {
+   "fr": "Charge",
+   "en": "Load"
+  },
+  "size": {
+   "fr": "Dimension",
+   "en": "Size"
+  }
+ }
+}

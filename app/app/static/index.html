@@ -1,0 +1,193 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Bibliothèque Altium</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 28 28'%3E%3Crect x='5' y='5' width='18' height='18' rx='2' fill='none' stroke='%23a8571f' stroke-width='2.5'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="/static/app.css">
+</head>
+<body>
+
+<!-- ===================== Connexion ===================== -->
+<div id="viewLogin" hidden>
+  <div class="login-wrap">
+    <form class="login" id="loginForm">
+      <h1><svg width="26" height="26" viewBox="0 0 28 28" aria-hidden="true"><rect x="5" y="5" width="18" height="18" rx="2" fill="none" stroke="var(--accent)" stroke-width="2"/><circle cx="9.5" cy="9.5" r="1.5" fill="var(--accent)"/></svg><span data-i18n="app.name"></span></h1>
+      <p data-i18n="login.intro"></p>
+      <div class="fld"><label for="lg_email" data-i18n="login.email"></label><input id="lg_email" type="email" autocomplete="username" required></div>
+      <div class="fld"><label for="lg_pw" data-i18n="login.password"></label><input id="lg_pw" type="password" autocomplete="current-password" required></div>
+      <p class="err-msg" id="lg_err"></p>
+      <div class="row">
+        <div class="seg lang" data-langseg role="group" data-i18n-aria="lang.aria"><button type="button" data-l="fr" lang="fr">FR</button><button type="button" data-l="en" lang="en">EN</button></div>
+        <button class="btn primary" type="submit" data-i18n="login.submit"></button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- ===================== Application ===================== -->
+<div id="viewApp" hidden>
+<header class="top">
+  <div class="brand">
+    <svg width="28" height="28" viewBox="0 0 28 28" aria-hidden="true"><rect x="5" y="5" width="18" height="18" rx="2" fill="none" stroke="var(--accent)" stroke-width="2"/><g fill="var(--accent)"><rect x="1" y="9" width="4" height="2"/><rect x="1" y="17" width="4" height="2"/><rect x="23" y="9" width="4" height="2"/><rect x="23" y="17" width="4" height="2"/><rect x="9" y="1" width="2" height="4"/><rect x="17" y="1" width="2" height="4"/><rect x="9" y="23" width="2" height="4"/><rect x="17" y="23" width="2" height="4"/></g><circle cx="9.5" cy="9.5" r="1.5" fill="var(--accent)"/></svg>
+    <h1><span data-i18n="app.name"></span><small data-i18n="app.sub"></small></h1>
+  </div>
+  <label class="search" for="q">
+    <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><circle cx="7" cy="7" r="5" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M11 11l3.5 3.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+    <input id="q" type="search" data-i18n-ph="search.ph" data-i18n-aria="search.aria" autocomplete="off">
+    <kbd>/</kbd>
+  </label>
+  <div class="top-actions">
+    <button class="btn only-narrow" id="toggleTree" type="button" data-i18n="btn.categories"></button>
+    <button class="btn primary" id="addBtn" type="button"><svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><path d="M7 1v12M1 7h12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><span class="lbl" data-i18n="btn.add"></span></button>
+    <div class="seg lang" data-langseg role="group" data-i18n-aria="lang.aria"><button type="button" data-l="fr" lang="fr">FR</button><button type="button" data-l="en" lang="en">EN</button></div>
+    <button class="bell" id="bellBtn" type="button" aria-haspopup="true" aria-expanded="false"><svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><path d="M9 2a4.5 4.5 0 0 0-4.5 4.5c0 3.2-1.5 5-1.5 5h12s-1.5-1.8-1.5-5A4.5 4.5 0 0 0 9 2z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><path d="M7.3 14.5a1.8 1.8 0 0 0 3.4 0" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg><span class="badge" id="bellBadge" hidden></span></button>
+    <button class="user-chip" id="userChip" type="button" aria-haspopup="true" aria-expanded="false" data-i18n-title="user.current"></button>
+    <div class="pop" id="notifPop" hidden></div>
+    <div class="pop" id="userPop" hidden></div>
+  </div>
+</header>
+
+<div id="viewExplore">
+<div class="app">
+  <nav class="pane tree-pane" id="treePane" data-i18n-aria="tree.aria"><div class="tree" id="tree"></div></nav>
+  <main class="pane">
+    <div class="main-h">
+      <div class="crumbs" id="crumbs"></div>
+      <div class="title-row"><h2 id="catTitle"></h2><span class="count tnum" id="count"></span></div>
+      <div class="filters">
+        <div class="seg" role="group" data-i18n-aria="filter.status" id="statusSeg">
+          <button type="button" data-v="all" class="on" data-i18n="filter.all"></button>
+          <button type="button" data-v="valid" data-i18n="filter.valid"></button>
+          <button type="button" data-v="draft" data-i18n="filter.draft"></button>
+          <button type="button" data-v="archived" data-i18n="filter.archived"></button>
+        </div>
+        <select id="mountSel" data-i18n-aria="filter.mount"></select>
+        <select id="pkgSel" data-i18n-aria="filter.pkg"></select>
+        <select id="bySel" data-i18n-aria="filter.by"></select>
+        <button class="reset" type="button" id="resetBtn" data-i18n="filter.reset" hidden></button>
+      </div>
+    </div>
+    <div class="table-wrap"><table><thead id="thead"></thead><tbody id="tbody"></tbody></table><div class="empty" id="empty" hidden></div></div>
+  </main>
+  <aside class="pane detail closed" id="detail" data-i18n-aria="d.aria"></aside>
+</div>
+</div>
+
+<div id="viewImport" hidden>
+<div class="imp">
+  <div class="imp-head">
+    <h2 id="impTitle"></h2>
+    <ol class="steps" id="steps">
+      <li data-s="1"><i>1</i><span data-i18n="imp.s1"></span></li>
+      <li data-s="2"><i>2</i><span data-i18n="imp.s2"></span></li>
+      <li data-s="3"><i>3</i><span data-i18n="imp.s3"></span></li>
+    </ol>
+  </div>
+  <button class="back" type="button" id="backBtn" data-i18n="imp.back"></button>
+
+  <section class="card" id="card1">
+    <div class="card-h"><h3 id="c1Title"></h3><p id="c1Sub"></p></div>
+    <label class="dropzone" id="dropzone" for="fileIn">
+      <svg width="36" height="36" viewBox="0 0 34 34" aria-hidden="true"><path d="M17 4v18M10 15l7 7 7-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M5 24v5h24v-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+      <strong data-i18n="imp.drop"></strong>
+      <span data-i18n="imp.or"></span>
+      <span class="mono">.zip · .IntLib · .SchLib · .PcbLib · .step · .pdf</span>
+      <input type="file" id="fileIn" multiple hidden accept=".zip,.IntLib,.SchLib,.PcbLib,.step,.stp,.pdf,.intlib,.schlib,.pcblib">
+    </label>
+    <div class="busy" id="busy" hidden><span class="spin" aria-hidden="true"></span><span data-i18n="imp.busy"></span></div>
+    <div id="fileZone" hidden>
+      <div class="flist" id="flist"></div>
+      <p class="note" id="fnote"></p>
+    </div>
+    <ul class="warn-list" id="impWarn" hidden></ul>
+    <div class="pick-row" id="pickRow" hidden></div>
+  </section>
+
+  <section class="card locked" id="card2">
+    <div class="card-h"><h3 data-i18n="imp.c2"></h3><p data-i18n-html="imp.req"></p></div>
+    <div class="previews" id="impPreviews"></div>
+    <div class="enrich" id="enrichRow"><span id="enrichMsg"></span><button class="btn small" type="button" id="enrichBtn" data-i18n="enrich.btn"></button></div>
+    <div class="form" id="form"></div>
+  </section>
+
+  <section class="card locked" id="card3">
+    <div class="card-h"><h3 data-i18n="imp.c3"></h3><p data-i18n="imp.c3sub"></p></div>
+    <div id="diffBox"></div>
+    <div class="checks" id="checks"></div>
+    <div class="ask-row"><label for="askSel" data-i18n="imp.ask"></label><select id="askSel"></select></div>
+    <div class="submit-row">
+      <p id="submitMsg"></p>
+      <button class="btn primary" type="button" id="submitBtn"></button>
+    </div>
+  </section>
+</div>
+</div>
+</div>
+
+<!-- ===================== Fenêtres ===================== -->
+<div class="modal-bg" id="catModal" hidden>
+  <div class="modal wide" role="dialog" aria-modal="true" aria-labelledby="cmTitle">
+    <h2 id="cmTitle" data-i18n="cm.title"></h2>
+    <p data-i18n="cm.intro"></p>
+    <div class="form">
+      <div class="fld"><label for="cm_name"><span data-i18n="cm.name"></span> <span class="req">*</span></label><input id="cm_name" data-i18n-ph="cm.namePh" autocomplete="off"></div>
+      <div class="fld"><label for="cm_group" data-i18n="cm.group"></label><select id="cm_group"></select></div>
+      <div class="fld wide" id="cm_newgroupWrap" hidden><label for="cm_newgroup"><span data-i18n="cm.newGroup"></span> <span class="req">*</span></label><input id="cm_newgroup" data-i18n-ph="cm.newGroupPh" autocomplete="off"></div>
+    </div>
+    <p class="common" data-i18n="cm.common"></p>
+    <div class="prow-h"><span data-i18n="cm.param"></span><span data-i18n="cm.type"></span><span data-i18n="cm.unit"></span><span></span></div>
+    <div id="cm_params" style="display:flex;flex-direction:column;gap:8px"></div>
+    <button class="link-btn" type="button" id="cm_addParam" data-i18n="cm.addParam"></button>
+    <p class="preview-line" id="cm_preview"></p>
+    <p class="err-msg" id="cm_err"></p>
+    <div class="row"><button class="btn" type="button" id="cm_cancel" data-i18n="cm.cancel"></button><button class="btn primary" type="button" id="cm_create" data-i18n="cm.create"></button></div>
+  </div>
+</div>
+
+<div class="modal-bg" id="notifyModal" hidden>
+  <div class="modal wide" role="dialog" aria-modal="true" aria-labelledby="nmTitle">
+    <h2 id="nmTitle" data-i18n="nm.title"></h2>
+    <p id="nmIntro"></p>
+    <div class="form"><div class="fld"><label for="nm_kind" data-i18n="nm.kind"></label><select id="nm_kind"></select></div></div>
+    <div class="fld"><label data-i18n="nm.to"></label></div>
+    <div class="recips" id="nm_recips"></div>
+    <div class="fld"><label for="nm_msg" data-i18n="nm.msg"></label><textarea id="nm_msg" data-i18n-ph="nm.msgPh"></textarea></div>
+    <p class="note" data-i18n="nm.internal"></p>
+    <p class="err-msg" id="nm_err"></p>
+    <div class="row"><button class="btn" type="button" id="nm_cancel" data-i18n="cm.cancel"></button><button class="btn primary" type="button" id="nm_send" data-i18n="nm.send"></button></div>
+  </div>
+</div>
+
+<div class="modal-bg" id="teamModal" hidden>
+  <div class="modal wide" role="dialog" aria-modal="true" aria-labelledby="tmTitle">
+    <h2 id="tmTitle" data-i18n="team.title"></h2>
+    <p data-i18n="team.intro"></p>
+    <div class="team" id="teamList"></div>
+    <div class="row"><button class="btn" type="button" id="tm_add" data-i18n="team.add" hidden></button><button class="btn" type="button" id="tm_close" data-i18n="team.close"></button></div>
+  </div>
+</div>
+
+<div class="modal-bg" id="pwModal" hidden>
+  <form class="modal" role="dialog" aria-modal="true" aria-labelledby="pwTitle" id="pwForm">
+    <h2 id="pwTitle" data-i18n="pw.title"></h2>
+    <div class="fld"><label for="pw_old" data-i18n="pw.old"></label><input id="pw_old" type="password" autocomplete="current-password" required></div>
+    <div class="fld"><label for="pw_new" data-i18n="pw.new"></label><input id="pw_new" type="password" autocomplete="new-password" minlength="8" required></div>
+    <p class="err-msg" id="pw_err"></p>
+    <div class="row"><button class="btn" type="button" id="pw_cancel" data-i18n="cm.cancel"></button><button class="btn primary" type="submit" data-i18n="pw.save"></button></div>
+  </form>
+</div>
+
+<div class="modal-bg" id="altiumModal" hidden>
+  <div class="modal wide" role="dialog" aria-modal="true" aria-labelledby="alTitle">
+    <h2 id="alTitle" data-i18n="al.title"></h2>
+    <div id="alBody"></div>
+    <div class="row"><button class="btn" type="button" id="al_close" data-i18n="team.close"></button></div>
+  </div>
+</div>
+
+<div class="toast" id="toast" hidden></div>
+<script src="/static/app.js"></script>
+</body>
+</html>
