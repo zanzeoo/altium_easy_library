@@ -6,7 +6,7 @@ from fastapi import FastAPI
 from fastapi.responses import FileResponse
 from fastapi.staticfiles import StaticFiles
 
-from . import auth, db, gitrepo, views
+from . import auth, db, gitrepo, maintenance, views
 from .api import r
 
 STATIC = Path(__file__).parent / "static"
@@ -22,6 +22,7 @@ async def lifespan(app: FastAPI):
         names = views.regenerate(c)
     print(f"Vues Altium prêtes : {', '.join(names)}")
     gitrepo.init()
+    maintenance.run_all()
     yield
     if db.pool:
         db.pool.close()
