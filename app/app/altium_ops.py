@@ -299,6 +299,7 @@ def write_part_files(part_id: str, sid: str, sym_idx: int | None, fp_idx: int | 
         one.rename_symbol(sym, part_id, original_name=part_id)
         target = dest / f"{part_id}.SchLib"
         one.save(target)
+        target.chmod(0o644)
         out.update(symbol_ref=part_id, symbol_name=target.name, pins=s["pins"], pin_ids=s["pin_ids"])
     if fp_idx is not None:
         f = man["footprints"][fp_idx]
@@ -314,6 +315,7 @@ def write_part_files(part_id: str, sid: str, sym_idx: int | None, fp_idx: int | 
             has3d = True
         target = dest / f"{safe_name(fp.name)}.PcbLib"
         one.save(target)
+        target.chmod(0o644)
         out.update(footprint_ref=fp.name, footprint_name=target.name, pads=f["pads"], pad_ids=f["pad_ids"], has_3d=has3d)
     return out
 
@@ -326,8 +328,10 @@ def fix_symbol_reference(path: Path, part_id: str) -> bool:
     sym = lib.symbols[0]
     if sym.name == part_id and sym.original_name == part_id:
         return False
+    mode = path.stat().st_mode & 0o777
     lib.rename_symbol(sym, part_id, original_name=part_id)
     lib.save(path)
+    path.chmod(mode | 0o644)    # save() recrée le fichier en 0600 : Samba (non root) ne pourrait plus le lire
     return True
 
 
